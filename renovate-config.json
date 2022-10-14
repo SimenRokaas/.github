@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate configuration for projects where major updates get separate PRs so that they can be closed (non-immortal)",
+  "enabledManagers": ["npm"],
+  "extends": [
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prConcurrentLimit10",
+    "workarounds:all",
+    ":pinAllExceptPeerDependencies"
+  ],
+  "packageRules": [
+    {
+      "groupName": "frontend - minor and patch",
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ],
+  "major": {
+    "packageRules": [
+      {
+        "groupName": "frontend - major",
+        "matchUpdateTypes": ["major"]
+      }
+    ]
+  },
+  "ignoreScripts": true,
+  "prHourlyLimit": 4,
+  "schedule": ["after 12:30am and before 11:30pm every weekday"],
+  "timezone": "UTC"
+}
